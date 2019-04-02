@@ -24,7 +24,7 @@ public class UserManager extends ModelManager {
 	 * createUser
 	 * attempts to create a user and returns a new user or an error message
 	 * 
-	 * @param name
+	 * @param name the name of the new user
 	 * @return a unique new user
 	 */
 	public Optional<User> createUser(String name) {

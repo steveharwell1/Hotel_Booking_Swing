@@ -22,9 +22,10 @@ public class User extends Model {
 
 	
 	/**
+	 * Constructor that takes the model manager to be used and the name of the user.
 	 * 
-	 * @param manager
-	 * @param name
+	 * @param manager the manager that the user object will live in
+	 * @param name the name of the user
 	 */
 	public User(UserManager manager, String name) {
 		setName(name);
