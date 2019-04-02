@@ -1,4 +1,9 @@
-
+/**
+ * #User
+ * @author Team B
+ * @since 2019-04-02
+ *
+ */
 public class User extends Model {
 	String name;
 	UserManager manager;
@@ -16,7 +21,11 @@ public class User extends Model {
 	}
 
 	
-	
+	/**
+	 * 
+	 * @param manager
+	 * @param name
+	 */
 	public User(UserManager manager, String name) {
 		setName(name);
 		setManager(manager);
@@ -29,6 +38,9 @@ public class User extends Model {
 		this.manager = manager;
 	}
 	
+	/**
+	 * 
+	 */
 	public String getPrimaryKey() {
 		return getName();
 	}
