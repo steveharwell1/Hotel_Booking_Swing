@@ -1,3 +1,9 @@
+package tests;
+
+import models.User;
+import models.UserManager;
+import utilities.Optional;
+
 /**
  * #TestModelManager
  * @author Team B
@@ -15,7 +21,7 @@ public class TestModelManager {
 		
 		
 		Optional<User> result = userManager.createUser("Dave");
-		if(result.succeeded()) {
+		if(result.success()) {
 			System.out.println("The user's name is " + result.get().getName());
 		}
 		else {
