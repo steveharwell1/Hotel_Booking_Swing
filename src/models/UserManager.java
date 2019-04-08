@@ -1,4 +1,8 @@
+package models;
+
 import java.util.ArrayList;
+
+import utilities.Optional;
 
 
 /**
@@ -16,9 +20,6 @@ public class UserManager extends ModelManager {
 	 * @param i index into the list of users
 	 * @return user at index i
 	 */
-	private User getUser(int i) {
-		return users.get(i);
-	}
 
 	/**
 	 * createUser

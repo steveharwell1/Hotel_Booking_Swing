@@ -1,13 +1,15 @@
-import java.awt.BorderLayout;
+package application;
+
+
+import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import views.*;
 
-public class App {
+public class App implements RedirectListener{
 
-	private JFrame frame;
-	private JPanel loginView;
+	public JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -36,13 +38,20 @@ public class App {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		loginView = new LoginPanel();
+		frame = new JFrame("Application");
+		frame.getContentPane().setLayout(new CardLayout());
 		
-		frame.setBounds(0, 0, 450, 300);
+		frame.add(new LoginView(this), "Login");
+		frame.add(new CreateCustomerView(this), "CreateCustomer");
+		
+		frame.setBounds(0, 0, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(loginView, BorderLayout.CENTER);
-		//frame.pack();
+	}
+
+	@Override
+	public void redirect(String viewName) {
+		CardLayout cl = (CardLayout) frame.getContentPane().getLayout();
+		cl.show(frame.getContentPane(), viewName);
 	}
 
 }

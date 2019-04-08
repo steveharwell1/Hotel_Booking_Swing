@@ -1,3 +1,5 @@
+package utilities;
+
 /**
  * #Optional
  * @author Team B
@@ -13,7 +15,7 @@ public class Optional<T> {
 	 * Constructor for a generic type. This represent a successfully created object
 	 * @param obj the successfully created object
 	 */
-	Optional(T obj){
+	public Optional(T obj){
 		success = true;
 		this.obj = obj;
 	}
@@ -23,7 +25,7 @@ public class Optional<T> {
 	 * 
 	 * @param errMsg the error message indicating the failure.
 	 */
-	Optional(String errMsg){
+	public Optional(String errMsg){
 		success = false;
 		this.errMsg = errMsg;
 	}
@@ -33,7 +35,7 @@ public class Optional<T> {
 	 * 
 	 * @return boolean true = an object in the optional and false = error message in the optional
 	 */
-	boolean succeeded() {
+	public boolean success() {
 		return success;
 	}
 	

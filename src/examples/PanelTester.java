@@ -1,13 +1,13 @@
-import java.awt.BorderLayout;
+package examples;
+
+import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
-public class App {
+public class PanelTester {
 
-	private JFrame frame;
-	private JPanel loginView;
+	public JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -16,7 +16,7 @@ public class App {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					App window = new App();
+					PanelTester window = new PanelTester();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -28,7 +28,7 @@ public class App {
 	/**
 	 * Create the application.
 	 */
-	public App() {
+	public PanelTester() {
 		initialize();
 	}
 
@@ -36,13 +36,12 @@ public class App {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		loginView = new LoginPanel();
-		
-		frame.setBounds(0, 0, 450, 300);
+		frame = new JFrame("Application");
+		frame.getContentPane().setLayout(new CardLayout());
+		frame.add(new ExamplePanel(this), "Login");
+		frame.add(new ExamplePanel2(this), "Create");
+		frame.setBounds(0, 0, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(loginView, BorderLayout.CENTER);
-		//frame.pack();
 	}
 
 }

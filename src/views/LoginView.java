@@ -1,33 +1,29 @@
-package examples;
+package views;
 
-import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class ExamplePanel extends JPanel {
+public class LoginView extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	PanelTester window;
+	RedirectListener viewChanger;
 	JTextField username = new JTextField(20);
 	JPasswordField password = new JPasswordField(20);
 	JButton login = new JButton("Login");
 	JButton create = new JButton("Create Account");
 
-	public ExamplePanel(PanelTester window) {
+	public LoginView(RedirectListener viewChanger) {
 		super();
-		this.window = window;
+		this.viewChanger = viewChanger;
 		setLayout(new GridBagLayout());
 		initialize();
 	}
@@ -57,8 +53,7 @@ public class ExamplePanel extends JPanel {
 			System.out.println(username.getText());
 			System.out.println(password.getPassword());
 			resetFields();
-			CardLayout cl = (CardLayout) window.frame.getContentPane().getLayout();
-			cl.show(window.frame.getContentPane(), "Create");
+			viewChanger.redirect("CreateCustomer");
 		});
 	}
 	

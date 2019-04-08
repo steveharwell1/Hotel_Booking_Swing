@@ -4,6 +4,7 @@
  * @since 2019-04-02
  *
  */
+package models;
 public class User extends Model {
 	String name;
 	UserManager manager;
