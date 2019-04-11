@@ -99,9 +99,10 @@ public class UserManager extends ModelManager {
 	 * required to be implemented by the abstract class, but this class only holds
 	 * data during execution so there is no need to save.
 	 */
+	@Override
 	public void save() {
 		CSVWriter writer = new CSVWriter(filename, User.getColumns());
-		for (User user : users) {
+		for (Model user : users) {
 			writer.addRow(user.asMap());
 		}
 		writer.save();

@@ -79,6 +79,8 @@ public class LoginView extends JPanel implements LoginListener{
 			if(!result.success()) {
 				errorLabel.setForeground(Color.RED);
 				errorLabel.setText("Incorrect user name or password");
+			} else {
+				viewChanger.redirect("UpdateAccountView");
 			}
 		});
 	}
@@ -94,7 +96,8 @@ public class LoginView extends JPanel implements LoginListener{
 
 	@Override
 	public void loginOccured(UserEvent e) {
-
+		resetFields();
+		errorLabel.setText("");
 	}
 
 	@Override

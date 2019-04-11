@@ -132,4 +132,12 @@ public class User implements Model {
 	public static String[] getColumns() {
 		return columns;
 	}
+	
+	public void save() {
+		manager.save();
+	}
+	
+	public void logout() {
+		manager.notifyLogout();
+	}
 }

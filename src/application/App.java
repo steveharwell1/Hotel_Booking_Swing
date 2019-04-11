@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import javafx.stage.FileChooser;
+import models.RoomManager;
 import models.UserManager;
 import views.*;
 
@@ -42,13 +44,19 @@ public class App implements RedirectListener{
 	private void initialize() {
 		frame = new JFrame("Application");
 		frame.getContentPane().setLayout(new CardLayout());
+		
 		UserManager userManager = new UserManager("users.csv");
+		RoomManager roomManager = new RoomManager();
 		
 		LoginView loginView = new LoginView(this);
 		loginView.setUserManager(userManager);
 		userManager.addLoginListener(loginView);
 		
+		UpdateAccountView updateAccountView = new UpdateAccountView(this);
+		userManager.addLoginListener(updateAccountView);
+		
 		frame.add(loginView, "Login");
+		frame.add(updateAccountView, "UpdateAccountView");
 		frame.setBounds(0, 0, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
