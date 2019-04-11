@@ -5,6 +5,8 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
+import models.UserManager;
 import views.*;
 
 public class App implements RedirectListener{
@@ -40,10 +42,13 @@ public class App implements RedirectListener{
 	private void initialize() {
 		frame = new JFrame("Application");
 		frame.getContentPane().setLayout(new CardLayout());
+		UserManager userManager = new UserManager("users.csv");
 		
-		frame.add(new LoginView(this), "Login");
-		frame.add(new CreateCustomerView(this), "CreateCustomer");
+		LoginView loginView = new LoginView(this);
+		loginView.setUserManager(userManager);
+		userManager.addLoginListener(loginView);
 		
+		frame.add(loginView, "Login");
 		frame.setBounds(0, 0, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
