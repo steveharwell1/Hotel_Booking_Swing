@@ -82,14 +82,14 @@ public class UserManager extends ModelManager {
 
 	private void notifyLogin(User user) {
 		for (LoginListener listener : listeners) {
-			listener.loginOccured(new UserEvent(user));
+			listener.loginOccurred(new UserEvent(user));
 		}
 
 	}
 
 	public void notifyLogout() {
 		for (LoginListener listener : listeners) {
-			listener.logoutOccured();
+			listener.logoutOccurred();
 		}
 	}
 

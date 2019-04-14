@@ -3,19 +3,23 @@
  */
 package models;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author steve
+ * @author Group B
  *
  */
 public class Room implements Model {
 	Map<String, String> map = new HashMap<String, String>();
+	private RoomManager manager;
 	private final static String [] columns = {"roomNumber", "style", "wheelChair", "floor", "rate"};
 	
 	
-	public Room(String roomNumber, String style, String wheelChair, String floor, String rate) {
+	public Room(RoomManager manager, String roomNumber, String style, String wheelChair, String floor, String rate) {
+		//System.out.println("Creating roomNumer " + roomNumber);
+		this.manager = manager;
 		map.put("roomNumber", roomNumber);
 		map.put("style", style);
 		map.put("wheelChair", wheelChair);
@@ -44,4 +48,13 @@ public class Room implements Model {
 		return columns;
 	}
 
+	public double getPrice() {
+		return Double.parseDouble(map.get("rate"));
+	}
+	
+	public String toString() {
+		return "Room " + map.get("roomNumber") + " is a " + map.get("style") +
+				", and costs $" + map.get("rate") + " for a weekday";
+	}
+	
 }

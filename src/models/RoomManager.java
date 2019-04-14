@@ -29,7 +29,7 @@ public class RoomManager extends ModelManager {
 			while (reader.hasNext()) {
 				// Create room objects
 				Map<String, String> map = reader.next();
-				rooms.add(new Room(map.get("roomNumber"), map.get("style"), map.get("wheelChair"), map.get("floor"),
+				rooms.add(new Room(this, map.get("roomNumber"), map.get("style"), map.get("wheelChair"), map.get("floor"),
 						map.get("rate")));
 			}
 		} catch (FileNotFoundException e) {
@@ -55,7 +55,7 @@ public class RoomManager extends ModelManager {
 	}
 
 	public Optional<Room> createRoom(Map<String, String> map) {
-		Room room = new Room(map.get("roomNumber"), map.get("style"), map.get("wheelChair"), map.get("floor"),
+		Room room = new Room(this, map.get("roomNumber"), map.get("style"), map.get("wheelChair"), map.get("floor"),
 				map.get("rate"));
 		rooms.add(room);
 		return new Optional<Room>(room);

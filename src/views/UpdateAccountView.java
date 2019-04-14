@@ -87,9 +87,9 @@ public class UpdateAccountView extends JPanel implements LoginListener{
 	}
 
 	@Override
-	public void loginOccured(UserEvent e) {
+	public void loginOccurred(UserEvent e) {
 		this.activeUser = e.getActiveUser();
-		System.out.println("Login occured for " + activeUser.getName());
+		//System.out.println("Login occured for " + activeUser.getName());
 		String greetingText = String.format(
 				"Hello %s!%n%n Please change your password",
 				activeUser.getName());
@@ -97,8 +97,8 @@ public class UpdateAccountView extends JPanel implements LoginListener{
 	}
 
 	@Override
-	public void logoutOccured() {
-		System.out.println("Logout occured for " + activeUser.getName());
+	public void logoutOccurred() {
+		//System.out.println("Logout occurred for " + activeUser.getName());
 		this.activeUser = null;
 		this.password.setText("");
 		this.greeting.setText("");

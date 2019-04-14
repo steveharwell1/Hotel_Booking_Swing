@@ -80,7 +80,13 @@ public class LoginView extends JPanel implements LoginListener{
 				errorLabel.setForeground(Color.RED);
 				errorLabel.setText("Incorrect user name or password");
 			} else {
-				viewChanger.redirect("UpdateAccountView");
+				if(result.get().hasPermission("customer")) {
+					viewChanger.redirect("ReservationView");
+				}
+				else if(result.get().hasPermission("employee")) {
+					viewChanger.redirect("UpdateAccountView");
+				}
+				
 			}
 		});
 	}
@@ -95,13 +101,13 @@ public class LoginView extends JPanel implements LoginListener{
 	}
 
 	@Override
-	public void loginOccured(UserEvent e) {
+	public void loginOccurred(UserEvent e) {
 		resetFields();
 		errorLabel.setText("");
 	}
 
 	@Override
-	public void logoutOccured() {
+	public void logoutOccurred() {
 		// TODO Auto-generated method stub
 		
 	}

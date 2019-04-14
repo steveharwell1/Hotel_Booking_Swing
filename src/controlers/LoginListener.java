@@ -1,6 +1,6 @@
 package controlers;
 
 public interface LoginListener {
-	public void loginOccured(UserEvent e);
-	public void logoutOccured();
+	public void loginOccurred(UserEvent e);
+	public void logoutOccurred();
 }
