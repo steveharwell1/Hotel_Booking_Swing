@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 
 import javafx.stage.FileChooser;
 import models.RoomManager;
+import models.SettingsManager;
+import models.TransactionManager;
 import models.UserManager;
 import views.*;
 
@@ -47,16 +49,25 @@ public class App implements RedirectListener{
 		
 		UserManager userManager = new UserManager("users.csv");
 		RoomManager roomManager = new RoomManager();
+		TransactionManager transactionManager = new TransactionManager("transactions.csv");
+		SettingsManager settingsManager = new SettingsManager("setting.csv");
 		
 		LoginView loginView = new LoginView(this);
 		loginView.setUserManager(userManager);
 		userManager.addLoginListener(loginView);
+		frame.add(loginView, "Login");
 		
 		UpdateAccountView updateAccountView = new UpdateAccountView(this);
 		userManager.addLoginListener(updateAccountView);
-		
-		frame.add(loginView, "Login");
 		frame.add(updateAccountView, "UpdateAccountView");
+		
+		ReservationView reservationView = new ReservationView(this, transactionManager);
+		reservationView.addRoomManager(roomManager);
+		reservationView.addSettingManager(settingsManager);
+		userManager.addLoginListener(reservationView);
+		frame.add(reservationView, "ReservationView");
+		
+
 		frame.setBounds(0, 0, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
