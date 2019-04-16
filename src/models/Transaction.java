@@ -46,7 +46,7 @@ public class Transaction implements Model {
 	
 	public void setEnd(String string) {
 		this.end = LocalDate.parse(string);
-		this.map.put("checkin", this.end.format(DateTimeFormatter.ISO_LOCAL_DATE));
+		this.map.put("checkout", this.end.format(DateTimeFormatter.ISO_LOCAL_DATE));
 	}
 
 	public void setStart(String string) {
@@ -94,5 +94,9 @@ public class Transaction implements Model {
 
 	public void setPrice(Double total) {
 		this.map.put("price", total.toString());
+	}
+
+	public void setConfirmationCode(String code) {
+		this.map.put("transactionCode", code);	
 	}
 }

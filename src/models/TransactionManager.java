@@ -50,16 +50,27 @@ public class TransactionManager extends ModelManager {
 
 	public boolean isAvailable(Room room, LocalDate begin, LocalDate end) {
 		for(Transaction trans : transactions) {
-			if(trans.getRoom().equals(room.getPrimaryKey())) {
+			if(!trans.getRoom().equals(room.getPrimaryKey()) || begin.isEqual(trans.getEnd()) || end.isEqual(trans.getStart())) {
+				//skip rooms that are not the one we are looking for
 				continue;
 			}
-			if(end.isBefore(trans.getStart()) || end.isEqual(trans.getStart())) {
-				continue;
+			//if search start date in a transaction
+			System.out.println(begin);
+			System.out.println(trans.getEnd());
+			System.out.println(trans.getStart());
+			if(!(begin.isBefore(trans.getStart()) || begin.isAfter(trans.getEnd())))
+			{
+				//transactions that start in another transaction
+				return false;
 			}
-			if(begin.isAfter(trans.getEnd()) || begin.isEqual(trans.getEnd())) {
-				continue;
+			if(!(end.isBefore(trans.getStart()) || end.isAfter(trans.getEnd()))) {
+				//if search end date conflicts with another transaction
+				return false;
 			}
-			return false;
+			if(end.isAfter(trans.getEnd()) && begin.isBefore(trans.getStart())) {
+				return false;
+			}
+
 		}
 		return true;
 		
