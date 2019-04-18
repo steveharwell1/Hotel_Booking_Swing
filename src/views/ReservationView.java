@@ -13,10 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import application.CCVerifier;
 import controlers.LoginListener;
 import controlers.UserEvent;
 import models.Room;
@@ -25,6 +27,7 @@ import models.SettingsManager;
 import models.Transaction;
 import models.TransactionManager;
 import models.User;
+import utilities.Optional;
 
 public class ReservationView extends JPanel implements LoginListener {
 
@@ -35,17 +38,24 @@ public class ReservationView extends JPanel implements LoginListener {
 	private RedirectListener viewChanger;
 	private User activeUser;
 	private RoomManager roomManager;
+	private SettingsManager settingsManager;
 	private TransactionManager transactionManager;
 	private Transaction workingTransaction;
 	private int resdays;
 	private int resweekends;
 	
+	/////////////////first row/////////////////
+	
+	
 	private JLabel errorLabel = new JLabel("");
+	
+	/////////////////next row/////////////////
+	
 	private JLabel greeting = new JLabel("Please Choose Reservation Date then Room");
-	private JButton backButton = new JButton("Back");
-	private JButton logoutButton = new JButton("Logout");
-	private JButton search = new JButton("Search");
-	private JButton complete = new JButton("complete");
+
+	
+	/////////////////next row/////////////////
+	
 
 	private static final String[] months = { "January", "February", "March", "April", "May", "June", "July", "August",
 			"September", "October", "November", "December" };
@@ -57,8 +67,20 @@ public class ReservationView extends JPanel implements LoginListener {
 	private JComboBox<Integer> endDay;
 	private JComboBox<Integer> endYear;
 	
+	/////////////////next row/////////////////
+	
 	private JList<Room> roomList = new JList<Room>();
-	private SettingsManager settingsManager;
+		private JButton backButton = new JButton("Back");
+	private JButton logoutButton = new JButton("Logout");
+	private JButton search = new JButton("Search");
+	private JButton complete = new JButton("Ready to Pay");
+	
+	/////////////////next row/////////////////
+	
+	private JLabel ccMessage = new JLabel("");
+	private JTextField creditCard = new JTextField(20);
+	private JButton submit = new JButton("Submit Payment");
+
 
 
 	public ReservationView(RedirectListener viewChanger, TransactionManager transactionManager) {
@@ -88,6 +110,7 @@ public class ReservationView extends JPanel implements LoginListener {
 		con.gridx = 0;
 		con.gridy = 0;
 		con.gridwidth = 7;
+		con.anchor = GridBagConstraints.LINE_START;
 		this.add(greeting, con);
 
 		////////////// Next Row /////////////////
@@ -109,6 +132,7 @@ public class ReservationView extends JPanel implements LoginListener {
 		////////////// Next Row /////////////////
 		con.gridy++;
 		con.gridwidth = 1;
+		con.fill = GridBagConstraints.HORIZONTAL;
 
 		con.gridx = 0;
 		this.add(startMonth, con);
@@ -142,22 +166,48 @@ public class ReservationView extends JPanel implements LoginListener {
 		this.add(search, con);
 
 		con.gridx = 1;
-		this.add(logoutButton, con);
+		this.add(logoutButton,con);
 
 		con.gridx = 2;
 		this.add(backButton, con);
 		
 		con.gridx = 3;
 		this.add(complete, con);
+		
+		////////////// Next Row /////////////////
+		con.gridy++;
+		
+		con.gridx = 0;
+		con.gridwidth = GridBagConstraints.REMAINDER;
+		this.add(ccMessage, con);
+		ccMessage.setVisible(false);
+		
+		////////////// Next Row /////////////////
+		con.gridy++;
+		
+		
+		con.gridx = 0;
+		con.gridwidth = 2;
+		this.add(creditCard, con);
+		creditCard.setVisible(false);
+		
+		con.gridx = 2;
+		this.add(submit, con);
+		submit.setVisible(false);
 
 		logoutButton.addActionListener(e -> {
 			activeUser.logout();
 			viewChanger.redirect("Login");
 		});
 
+		
+		//handle a search by date
 		search.addActionListener(e -> {
 			errorLabel.setForeground(Color.RED);
 			errorLabel.setText("");
+			ccMessage.setVisible(false);
+			creditCard.setVisible(false);
+			submit.setVisible(false);
 			try {
 				LocalDate begin = LocalDate.of((int) startYear.getSelectedItem(), startMonth.getSelectedIndex() + 1,
 						(int) startDay.getSelectedItem());
@@ -176,13 +226,7 @@ public class ReservationView extends JPanel implements LoginListener {
 
 				resdays = 0;
 				resweekends = 0;
-				while (begin.isBefore(end)) {
-					resdays++;
-					if (begin.get(ChronoField.DAY_OF_WEEK) == 5 || begin.get(ChronoField.DAY_OF_WEEK) == 6) {
-						resweekends++;
-					}
-					begin = begin.plusDays(1);
-				}
+
 				
 				DefaultListModel<Room> listModel = new DefaultListModel<Room>();
 				
@@ -194,7 +238,16 @@ public class ReservationView extends JPanel implements LoginListener {
 						System.out.printf("Room %s is available%n", room.asMap().get("roomNumber"));
 					}
 				}
+				
 				roomList.setModel(listModel);
+				
+				while (begin.isBefore(end)) {
+					resdays++;
+					if (begin.get(ChronoField.DAY_OF_WEEK) == 5 || begin.get(ChronoField.DAY_OF_WEEK) == 6) {
+						resweekends++;
+					}
+					begin = begin.plusDays(1);
+				}
 				System.out.printf("Your stay will be %d day(s) long, and %d of those days will be on the weekend.%n",
 						resdays, resweekends);
 			} catch (DateTimeException exception) {
@@ -203,6 +256,7 @@ public class ReservationView extends JPanel implements LoginListener {
 			}
 		});
 		
+		//Handle a selected room
 		complete.addActionListener(e -> {
 			Room selectedRoom = roomList.getSelectedValue();
 			if(selectedRoom == null) {
@@ -216,7 +270,23 @@ public class ReservationView extends JPanel implements LoginListener {
 			
 			workingTransaction.setPrice(total);
 			
-			System.out.println("The price is " + price + " the total is " + total);
+			ccMessage.setForeground(Color.BLUE);
+			ccMessage.setText(String.format("Please enter you credit card number to pay %.2f", total));
+			ccMessage.setVisible(true);
+			creditCard.setVisible(true);
+			submit.setVisible(true);
+		});
+		
+		submit.addActionListener(e -> {
+			Optional<Long> result = CCVerifier.getInstance().verify(creditCard.getText());
+			if(result.success()) {
+				workingTransaction.setConfirmationCode(result.get().toString());
+				workingTransaction.finalize();
+				JOptionPane.showMessageDialog(null, "Your reservation was successful " + workingTransaction);
+				resetFields();
+			} else {
+				errorLabel.setText(result.getErrMsg());
+			}
 		});
 
 	}
@@ -228,6 +298,15 @@ public class ReservationView extends JPanel implements LoginListener {
 				((JTextField) c).setText("");
 			}
 		}
+		
+		ccMessage.setVisible(false);
+		creditCard.setVisible(false);
+		submit.setVisible(false);
+		errorLabel.setText("");
+		
+		roomList.setModel(new DefaultListModel<Room>());
+
+		this.workingTransaction = null;
 	}
 
 	@Override
@@ -238,7 +317,7 @@ public class ReservationView extends JPanel implements LoginListener {
 
 	@Override
 	public void logoutOccurred() {
-		// System.out.println("Logout occurred for " + activeUser.getName());
+		resetFields();
 		this.activeUser = null;
 	}
 

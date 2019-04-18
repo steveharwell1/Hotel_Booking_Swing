@@ -41,8 +41,7 @@ public class AppTemplate implements RedirectListener{
 		//Add views to application
 //		frame.add(new ViewTemplate(this), "TestView");
 		
-		
-		
+		frame.add(new CheckinView(this), "CheckinView");
 		
 		
 		frame.setBounds(0, 0, 800, 600);
