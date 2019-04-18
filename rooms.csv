@@ -1,0 +1,6 @@
+roomNumber ,style ,wheelChair ,floor ,rate 
+1 ,suite ,true ,1 ,300.0 
+2 ,suite ,true ,1 ,300.0 
+3 ,single bed ,false ,1 ,100.0 
+4 ,single bed ,false ,1 ,100.0 
+5 ,two bed ,false ,1 ,200.0 
