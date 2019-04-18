@@ -12,7 +12,7 @@ import utilities.CSVReader;
 import utilities.CSVWriter;
 
 /**
- * @author steve
+ * @author Group B
  *
  */
 public class TransactionManager extends ModelManager {
@@ -55,9 +55,9 @@ public class TransactionManager extends ModelManager {
 				continue;
 			}
 			//if search start date in a transaction
-			System.out.println(begin);
-			System.out.println(trans.getEnd());
-			System.out.println(trans.getStart());
+//			System.out.println(begin);
+//			System.out.println(trans.getEnd());
+//			System.out.println(trans.getStart());
 			if(!(begin.isBefore(trans.getStart()) || begin.isAfter(trans.getEnd())))
 			{
 				//transactions that start in another transaction
@@ -78,6 +78,16 @@ public class TransactionManager extends ModelManager {
 
 	protected void addTransaction(Transaction transaction) {
 		transactions.add(transaction);
+	}
+
+	public ArrayList<Transaction> getCheckToday() {
+		ArrayList<Transaction> att = new ArrayList<Transaction>(); 
+		for(Transaction tran : transactions) {
+			if(tran.getStart().equals(LocalDate.now()) || tran.getEnd().equals(LocalDate.now())) {
+				att.add(tran);
+			}
+		}
+		return att;
 	}
 
 }

@@ -99,4 +99,30 @@ public class Transaction implements Model {
 	public void setConfirmationCode(String code) {
 		this.map.put("transactionCode", code);	
 	}
+	
+	@Override
+	public String toString() {
+		String s = "Room: " + map.get("roomNumber") + " Guest: " + map.get("customer") + " Confirm: " + map.get("transactionCode");
+		s = s + " Checked in: " + (map.get("checkedin") == null? "No ": "Yes ");
+		s = s + " Checked out: " + (map.get("checkedout") == null? "No ": "Yes ");
+		return s;
+	}
+
+	public void toggleCheckedin() {
+		if(map.get("checkedin") == null) {
+			map.put("checkedin", "true");
+		} else {
+			map.put("checkedin", null);
+		}
+		save();
+	}
+	
+	public void toggleCheckedout() {
+		if(map.get("checkedout") == null) {
+			map.put("checkedout", "true");
+		} else {
+			map.put("checkedout", null);
+		}
+		save();
+	}
 }

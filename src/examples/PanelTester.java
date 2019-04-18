@@ -38,8 +38,9 @@ public class PanelTester {
 	private void initialize() {
 		frame = new JFrame("Application");
 		frame.getContentPane().setLayout(new CardLayout());
-		frame.add(new ExamplePanel(this), "Login");
-		frame.add(new ExamplePanel2(this), "Create");
+		
+		
+		//frame.add(new CheckinView(this), "CheckinView");
 		frame.setBounds(0, 0, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

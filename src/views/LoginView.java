@@ -84,7 +84,7 @@ public class LoginView extends JPanel implements LoginListener{
 					viewChanger.redirect("ReservationView");
 				}
 				else if(result.get().hasPermission("employee")) {
-					viewChanger.redirect("UpdateAccountView");
+					viewChanger.redirect("CheckinView");
 				}
 				
 			}
