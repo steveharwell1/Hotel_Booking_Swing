@@ -39,7 +39,7 @@ public class AppTemplate implements RedirectListener{
 		frame.getContentPane().setLayout(new CardLayout());
 		
 		//Add views to application
-//		frame.add(new ViewTemplate(this), "TestView");
+		frame.add(new CustomerMainView(this), "CustomerMainView");
 		
 		
 		

@@ -67,6 +67,10 @@ public class App implements RedirectListener{
 		userManager.addLoginListener(reservationView);
 		frame.add(reservationView, "ReservationView");
 		
+		// My edits
+		CustomerMainView custMainView = new CustomerMainView(this);
+		userManager.addLoginListener(custMainView);
+		frame.add(custMainView, "CustomerMainView");
 
 		frame.setBounds(0, 0, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
