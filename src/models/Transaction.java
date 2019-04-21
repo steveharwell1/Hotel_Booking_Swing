@@ -125,4 +125,12 @@ public class Transaction implements Model {
 		}
 		save();
 	}
+
+	public String getUserKey() {
+		return map.get("customer");
+	}
+
+	public double getTotalPrice() {
+		return Double.parseDouble(map.get("price"));
+	}
 }

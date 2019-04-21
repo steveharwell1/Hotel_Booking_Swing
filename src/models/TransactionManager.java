@@ -8,8 +8,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 
+import controlers.TransactionListener;
 import utilities.CSVReader;
 import utilities.CSVWriter;
+import views.TransactionsView;
 
 /**
  * @author Group B
@@ -17,6 +19,7 @@ import utilities.CSVWriter;
  */
 public class TransactionManager extends ModelManager {
 	private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+	private ArrayList<TransactionListener> listeners = new ArrayList<TransactionListener>();
 	String filename;
 	/**
 	 * 
@@ -78,6 +81,7 @@ public class TransactionManager extends ModelManager {
 
 	protected void addTransaction(Transaction transaction) {
 		transactions.add(transaction);
+		notifyListeners();
 	}
 
 	public ArrayList<Transaction> getCheckToday() {
@@ -88,6 +92,26 @@ public class TransactionManager extends ModelManager {
 			}
 		}
 		return att;
+	}
+	
+	public ArrayList<Transaction> getUserTransactions(User user) {
+		ArrayList<Transaction> att = new ArrayList<Transaction>();
+		for(Transaction tran : transactions) {
+			if(user.getPrimaryKey().equals(tran.getUserKey())) {
+				att.add(tran);
+			}
+		}
+		return att;
+	}
+
+	public void addTransactionListener(TransactionListener listener) {
+		listeners.add(listener);
+	}
+	
+	public void notifyListeners() {
+		for(TransactionListener listener : listeners) {
+			listener.transactionsUpdated();
+		}
 	}
 
 }
