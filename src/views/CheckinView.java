@@ -86,7 +86,7 @@ public class CheckinView extends JPanel implements LoginListener{
 		
 		back.addActionListener(e ->{
 			errorLabel.setText("");
-			viewChanger.redirect("EmployeeMainView");
+			viewChanger.redirect("EmpMainView");
 		});
 		
 		logout.addActionListener(e -> {

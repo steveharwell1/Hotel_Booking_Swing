@@ -5,8 +5,6 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-
-import javafx.stage.FileChooser;
 import models.RoomManager;
 import models.SettingsManager;
 import models.TransactionManager;
@@ -72,6 +70,40 @@ public class App implements RedirectListener{
 		userManager.addLoginListener(checkinView);
 		frame.add(checkinView, "CheckinView");
 		
+		TmpEmpMainView empMainView = new TmpEmpMainView(this);
+		userManager.addLoginListener(empMainView);
+		frame.add(empMainView, "EmpMainView");
+		
+		TmpCustMainView custMainView = new TmpCustMainView(this);
+		userManager.addLoginListener(custMainView);
+		frame.add(custMainView, "CustMainView");
+		
+		ReportView reportView = new ReportView(this);
+		userManager.addLoginListener(reportView);
+		frame.add(reportView, "ReportsView");
+		
+		VacantView vacantView = new VacantView(this);
+		userManager.addLoginListener(vacantView);
+		vacantView.addTransactionManager(transactionManager);
+		vacantView.addRoomManager(roomManager);
+		frame.add(vacantView, "Vacant Rooms");
+		
+		TransactionsView transactionsView = new TransactionsView(this);
+		userManager.addLoginListener(transactionsView);
+		transactionManager.addTransactionListener(transactionsView);
+		transactionsView.addTransactionManager(transactionManager);
+		frame.add(transactionsView, "TransactionsView");
+		
+		RevenueReportView revReport = new RevenueReportView(this);
+		userManager.addLoginListener(revReport);
+		revReport.addTransactionManager(transactionManager);
+		frame.add(revReport, "Revenue Report View");
+		
+		PricingView pricingView = new PricingView(this);
+		userManager.addLoginListener(pricingView);
+		pricingView.addSettingsManager(settingsManager);
+		frame.add(pricingView, "PricingView");
+		
 
 		frame.setBounds(0, 0, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,6 +113,7 @@ public class App implements RedirectListener{
 	public void redirect(String viewName) {
 		CardLayout cl = (CardLayout) frame.getContentPane().getLayout();
 		cl.show(frame.getContentPane(), viewName);
+		System.out.println("Screen has been redirected to " + viewName);
 	}
 
 }

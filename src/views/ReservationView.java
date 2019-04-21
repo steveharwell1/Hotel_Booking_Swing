@@ -199,6 +199,10 @@ public class ReservationView extends JPanel implements LoginListener {
 			activeUser.logout();
 			viewChanger.redirect("Login");
 		});
+		
+		backButton.addActionListener(e -> {
+			viewChanger.redirect("CustMainView");
+		});
 
 		
 		//handle a search by date

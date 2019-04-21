@@ -75,6 +75,14 @@ public class UpdateAccountView extends JPanel implements LoginListener{
 			viewChanger.redirect("Login");
 		});
 		
+		backButton.addActionListener(e -> {
+			if(activeUser.hasPermission("employee")) {
+				viewChanger.redirect("EmpMainView");
+			} else if (activeUser.hasPermission("customer")) {
+				viewChanger.redirect("CustMainView");
+			}
+		});
+		
 	}
 	
 	void resetFields() {
