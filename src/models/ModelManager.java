@@ -1,10 +1,13 @@
+package models;
+
 /**
- * #ModelManager
- * @author Team B
- * @since 2019-04-02
+ * ModelManager the root interface for a manager of a model. The manager's
+ * responsibility is to save and read data from long term storage to create
+ * instances of data models
+ * 
+ * @author Group B
  *
  */
-package models;
 public abstract class ModelManager {
 	public abstract void save();
 }
