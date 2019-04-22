@@ -1,27 +1,19 @@
-/**
- * 
- */
 package tests;
-
 
 import models.Settings;
 import models.SettingsManager;
 
 /**
- * @author steve
+ * SettingsTester Tests the functionality of the Settings class and the
+ * SettingsManager class
+ * 
+ * @author Group B
  *
  */
 public class SettingsTester {
 
 	/**
-	 * 
-	 */
-	public SettingsTester() {
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param args
+	 * @param args unused
 	 */
 	public static void main(String[] args) {
 		SettingsManager manager = new SettingsManager("test.csv");

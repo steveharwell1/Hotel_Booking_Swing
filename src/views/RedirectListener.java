@@ -1,10 +1,9 @@
-/**
- * 
- */
+
 package views;
 
 /**
- * @author steve
+ * 
+ * @author Group B
  *
  */
 public interface RedirectListener {

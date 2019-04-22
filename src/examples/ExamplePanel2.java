@@ -3,21 +3,20 @@
  */
 package examples;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.LayoutManager;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * @author steve
+ * @deprecated replaced by ViewTemplate
+ * @author Group B
  *
  */
-public class ExamplePanel2 extends JPanel{
+@Deprecated
+public class ExamplePanel2 extends JPanel {
 	PanelTester window;
 	JButton back;
 	JLabel backNotice;
@@ -32,21 +31,20 @@ public class ExamplePanel2 extends JPanel{
 		this.window = window;
 		initialize();
 	}
-	
+
 	private void initialize() {
-		this.setBounds(0,  0, 500, 500);
+		this.setBounds(0, 0, 500, 500);
 		back = new JButton("Back");
 		backNotice = new JLabel("Please Click Back");
-		
+
 		back.addActionListener(e -> {
 			CardLayout cl = (CardLayout) window.frame.getContentPane().getLayout();
 			cl.show(window.frame.getContentPane(), "Login");
-			});
-		
+		});
+
 		this.add(backNotice);
 		this.add(back);
 
-		
 	}
 
 }

@@ -1,9 +1,7 @@
 package views;
 
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.time.LocalDate;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -13,15 +11,18 @@ import javax.swing.JPanel;
 import controlers.LoginListener;
 import controlers.TransactionListener;
 import controlers.UserEvent;
-import models.Room;
 import models.Transaction;
 import models.TransactionManager;
 import models.User;
-import views.RedirectListener;
 
 //Add Components imports
 //import javax.swing.JButton;
 
+/**
+ * 
+ * @author Group B
+ *
+ */
 public class TransactionsView extends JPanel implements LoginListener, TransactionListener {
 
 	private static final long serialVersionUID = 1L;

@@ -1,6 +1,5 @@
 package views;
 
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.time.LocalDate;
@@ -16,8 +15,12 @@ import models.Room;
 import models.RoomManager;
 import models.TransactionManager;
 import models.User;
-import views.RedirectListener;
 
+/**
+ * 
+ * @author Group B
+ *
+ */
 public class VacantView extends JPanel implements LoginListener {
 
 	private static final long serialVersionUID = 1L;
@@ -67,7 +70,7 @@ public class VacantView extends JPanel implements LoginListener {
 	public void loginOccurred(UserEvent e) {
 		activeUser = e.getActiveUser();
 		DefaultListModel<Room> listModel = new DefaultListModel<Room>();
-		
+
 		for (Room room : roomManager.getRooms()) {
 			if (transactionManager.isAvailable(room, LocalDate.now(), LocalDate.now().plusDays(1))) {
 				listModel.addElement(room);
