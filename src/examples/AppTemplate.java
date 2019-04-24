@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import views.CheckinView;
+import views.CustomerMainView;
 import views.RedirectListener;
 
 /**
@@ -52,12 +52,8 @@ public class AppTemplate implements RedirectListener {
 		frame = new JFrame("Application");
 		frame.getContentPane().setLayout(new CardLayout());
 
-		//Add views to application
+		// Add views to application
 		frame.add(new CustomerMainView(this), "CustomerMainView");
-		
-		
-		
-		
 
 		frame.setBounds(0, 0, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

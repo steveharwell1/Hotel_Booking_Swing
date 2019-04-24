@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import controlers.LoginListener;
 import controlers.UserEvent;
@@ -22,7 +21,7 @@ import models.User;
  * @author Group B
  *
  */
-public class RevenueReportView extends JPanel implements LoginListener {
+public class RevenueReportView extends View implements LoginListener {
 
 	private static final long serialVersionUID = 1L;
 	RedirectListener viewChanger;
@@ -49,18 +48,24 @@ public class RevenueReportView extends JPanel implements LoginListener {
 //		con.gridy = 2;
 //		this.add(create, con);
 
-		con.gridx = 0;
-		con.gridy = 0;
-		con.gridwidth = 2;
-		this.add(dailyRev, con);
+		JLabel marquee = new JLabel("Earnings Today");
+		marquee.setFont(jumboFont);
+		con.gridwidth = GridBagConstraints.REMAINDER;
+		con.fill = GridBagConstraints.HORIZONTAL;
+		this.add(marquee, con);
 
 		con.gridx = 0;
 		con.gridy = 1;
+		dailyRev.setFont(labelFont);
+		this.add(dailyRev, con);
+
+		con.gridx = 0;
+		con.gridy = 2;
 		con.gridwidth = 1;
 		this.add(backButton, con);
 
 		con.gridx = 1;
-		con.gridy = 1;
+		con.gridy = 2;
 		this.add(logoutButton, con);
 
 //		Add Controllers to components

@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 
 import controlers.LoginListener;
 import controlers.UserEvent;
@@ -21,14 +21,14 @@ import models.User;
  * @author Group B
  *
  */
-public class VacantView extends JPanel implements LoginListener {
+public class VacantView extends View implements LoginListener {
 
 	private static final long serialVersionUID = 1L;
 	RedirectListener viewChanger;
 	User activeUser;
 
 	JList<Room> vacantroom = new JList<Room>();
-	JButton empmainview = new JButton("Employment main veiw");
+	JButton empmainview = new JButton("Back");
 	JButton logout = new JButton("Logout");
 	private RoomManager roomManager;
 	private TransactionManager transactionManager;
@@ -42,21 +42,27 @@ public class VacantView extends JPanel implements LoginListener {
 
 	private void initialize() {
 		GridBagConstraints con = new GridBagConstraints();
+		con.fill = GridBagConstraints.HORIZONTAL;
 
 		con.gridx = 0;
 		con.gridy = 0;
+		JLabel marquee = new JLabel("Vacant Room List");
+		marquee.setFont(jumboFont);
+		this.add(marquee, con);
+		con.gridx = 0;
+		con.gridy = 1;
 		con.gridwidth = 2;
 		this.add(vacantroom, con);
 		con.gridwidth = 1;
 		con.gridx = 0;
-		con.gridy = 1;
+		con.gridy = 2;
 		this.add(empmainview, con);
 		con.gridx = 1;
-		con.gridy = 1;
+		con.gridy = 2;
 		this.add(logout, con);
 
 		empmainview.addActionListener(e -> {
-			viewChanger.redirect("EmpMainView");
+			viewChanger.redirect("ReportsView");
 		});
 
 		logout.addActionListener(e -> {

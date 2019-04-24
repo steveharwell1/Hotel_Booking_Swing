@@ -1,7 +1,6 @@
 package views;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.time.DateTimeException;
@@ -15,7 +14,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
@@ -35,7 +33,7 @@ import utilities.Optional;
  * @author Group B
  *
  */
-public class ReservationView extends JPanel implements LoginListener {
+public class ReservationView extends View implements LoginListener {
 
 	/**
 	 * 
@@ -110,14 +108,23 @@ public class ReservationView extends JPanel implements LoginListener {
 		////////////// First Row /////////////////
 		con.gridx = 0;
 		con.gridy = 0;
-		con.gridwidth = 7;
+		con.gridwidth = GridBagConstraints.REMAINDER;
 		con.anchor = GridBagConstraints.LINE_START;
+
+		JLabel marquee = new JLabel("Book a Room");
+		marquee.setFont(jumboFont);
+		this.add(marquee, con);
+
+		////////////// Next Row /////////////////
+		con.gridy++;
+		greeting.setFont(labelFont);
 		this.add(greeting, con);
 
 		////////////// Next Row /////////////////
 		con.gridy++;
 
 		con.gridx = 0;
+		errorLabel.setFont(labelFont);
 		this.add(errorLabel, con);
 
 		////////////// Next Row /////////////////
@@ -125,10 +132,14 @@ public class ReservationView extends JPanel implements LoginListener {
 		con.gridwidth = 3;
 
 		con.gridx = 0;
-		this.add(new JLabel("Check in Date"), con);
+		JLabel inDate = new JLabel("Check in Date");
+		inDate.setFont(labelFont);
+		this.add(inDate, con);
 
 		con.gridx = 4;
-		this.add(new JLabel("Check out Date"), con);
+		JLabel outDate = new JLabel("Check out Date");
+		outDate.setFont(labelFont);
+		this.add(outDate, con);
 
 		////////////// Next Row /////////////////
 		con.gridy++;
@@ -179,6 +190,7 @@ public class ReservationView extends JPanel implements LoginListener {
 
 		con.gridx = 0;
 		con.gridwidth = GridBagConstraints.REMAINDER;
+		ccMessage.setFont(labelFont);
 		this.add(ccMessage, con);
 		ccMessage.setVisible(false);
 
@@ -292,13 +304,9 @@ public class ReservationView extends JPanel implements LoginListener {
 
 	}
 
-	void resetFields() {
-		Component[] components = this.getComponents();
-		for (Component c : components) {
-			if (c instanceof JTextField) {
-				((JTextField) c).setText("");
-			}
-		}
+	@Override
+	protected void resetFields() {
+		super.resetFields();
 
 		ccMessage.setVisible(false);
 		creditCard.setVisible(false);

@@ -1,13 +1,11 @@
 package views;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -22,7 +20,7 @@ import utilities.Optional;
  * @author Group B
  *
  */
-public class LoginView extends JPanel implements LoginListener {
+public class LoginView extends View implements LoginListener {
 
 	/**
 	 * 
@@ -45,19 +43,32 @@ public class LoginView extends JPanel implements LoginListener {
 
 	private void initialize() {
 		GridBagConstraints con = new GridBagConstraints();
+
+		con.fill = GridBagConstraints.HORIZONTAL;
+		con.gridwidth = GridBagConstraints.REMAINDER;
+
 		con.gridx = 0;
 		con.gridy = 0;
-		con.gridwidth = 2;
+		JLabel marquee = new JLabel("TAMUC Inn");
+		marquee.setFont(jumboFont);
+		this.add(marquee, con);
+		con.gridx = 0;
+		con.gridy++;
+		errorLabel.setFont(labelFont);
 		this.add(errorLabel, con);
 		con.gridwidth = 1;
 		con.gridx = 0;
 		con.gridy++;
-		this.add(new JLabel("User Name"), con);
+		JLabel userLabel = new JLabel("User Name");
+		userLabel.setFont(labelFont);
+		this.add(userLabel, con);
 		con.gridx = 1;
 		add(username, con);
 		con.gridx = 0;
 		con.gridy++;
-		this.add(new JLabel("Password"), con);
+		JLabel passLabel = new JLabel("Password");
+		passLabel.setFont(labelFont);
+		this.add(passLabel, con);
 		con.gridx = 1;
 		this.add(password, con);
 		con.gridx = 0;
@@ -97,15 +108,6 @@ public class LoginView extends JPanel implements LoginListener {
 
 			}
 		});
-	}
-
-	void resetFields() {
-		Component[] components = this.getComponents();
-		for (Component c : components) {
-			if (c instanceof JTextField) {
-				((JTextField) c).setText("");
-			}
-		}
 	}
 
 	@Override

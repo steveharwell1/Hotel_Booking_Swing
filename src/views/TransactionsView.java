@@ -5,8 +5,8 @@ import java.awt.GridBagLayout;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 
 import controlers.LoginListener;
 import controlers.TransactionListener;
@@ -23,7 +23,7 @@ import models.User;
  * @author Group B
  *
  */
-public class TransactionsView extends JPanel implements LoginListener, TransactionListener {
+public class TransactionsView extends View implements LoginListener, TransactionListener {
 
 	private static final long serialVersionUID = 1L;
 	RedirectListener viewChanger;
@@ -50,14 +50,19 @@ public class TransactionsView extends JPanel implements LoginListener, Transacti
 //		con.gridx = 1;
 //		con.gridy = 2;
 //		this.add(create, con);
-
-		con.gridy = 0;
+		con.fill = GridBagConstraints.HORIZONTAL;
+		con.gridwidth = GridBagConstraints.REMAINDER;
+		JLabel marquee = new JLabel("Purchase History");
+		marquee.setFont(jumboFont);
+		this.add(marquee, con);
+		con.gridy = 1;
 		con.gridx = 0;
-		con.gridwidth = 2;
+
 		this.add(transactionList, con);
 
-		con.gridy = 1;
+		con.gridy = 2;
 		con.gridwidth = 1;
+
 		this.add(backButton, con);
 		con.gridx = 1;
 		this.add(logoutButton, con);

@@ -1,15 +1,12 @@
 package views;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 import controlers.LoginListener;
 import controlers.UserEvent;
@@ -20,7 +17,7 @@ import models.User;
  * @author Group B
  *
  */
-public class UpdateAccountView extends JPanel implements LoginListener {
+public class UpdateAccountView extends View implements LoginListener {
 
 	/**
 	 * 
@@ -47,7 +44,13 @@ public class UpdateAccountView extends JPanel implements LoginListener {
 
 		con.gridx = 0;
 		con.gridy = 0;
-		con.gridwidth = 3;
+		con.gridwidth = GridBagConstraints.REMAINDER;
+		JLabel marquee = new JLabel("Change Password");
+		marquee.setFont(jumboFont);
+		this.add(marquee, con);
+		con.gridx = 0;
+		con.gridy++;
+		greeting.setFont(labelFont);
 		this.add(greeting, con);
 
 		con.gridx = 0;
@@ -56,16 +59,17 @@ public class UpdateAccountView extends JPanel implements LoginListener {
 
 		con.gridy++;
 		this.add(password, con);
+		con.fill = GridBagConstraints.HORIZONTAL;
 
 		con.gridwidth = 1;
 		con.gridy++;
-		this.add(changePassword, con);
-
-		con.gridx = 1;
-		this.add(logoutButton, con);
+		this.add(backButton, con);
 
 		con.gridx = 2;
-		this.add(backButton, con);
+		this.add(logoutButton, con);
+
+		con.gridx = 3;
+		this.add(changePassword, con);
 
 		changePassword.addActionListener(e -> {
 			errorLabel.setForeground(Color.BLUE);
@@ -87,15 +91,6 @@ public class UpdateAccountView extends JPanel implements LoginListener {
 			}
 		});
 
-	}
-
-	void resetFields() {
-		Component[] components = this.getComponents();
-		for (Component c : components) {
-			if (c instanceof JTextField) {
-				((JTextField) c).setText("");
-			}
-		}
 	}
 
 	@Override

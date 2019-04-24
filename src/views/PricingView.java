@@ -6,7 +6,6 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controlers.LoginListener;
@@ -22,13 +21,13 @@ import models.User;
  * @author Group B
  *
  */
-public class PricingView extends JPanel implements LoginListener {
+public class PricingView extends View implements LoginListener {
 
 	private static final long serialVersionUID = 1L;
 	RedirectListener viewChanger;
 	// Add component variables
 	// JButton create = new JButton("Create Account");
-	JTextField inputField = new JTextField(5);
+	JTextField inputField = new JTextField(20);
 	JLabel errorLabel = new JLabel("");
 	JButton setButton = new JButton("Set Markup");
 	JButton backButton = new JButton("back");
@@ -53,21 +52,31 @@ public class PricingView extends JPanel implements LoginListener {
 
 		con.gridx = 0;
 		con.gridy = 0;
-		con.gridwidth = 3;
-		this.add(new JLabel("Please enter a number for weekend markup(1.00 is 100% markup)"), con);
+		con.gridwidth = GridBagConstraints.REMAINDER;
+
+		JLabel marquee = new JLabel("Weekend Rate");
+		marquee.setFont(jumboFont);
+		this.add(marquee, con);
+
+		con.gridy++;
+
+		JLabel instruction = new JLabel("Please enter a number for weekend markup(1.00 is 100% markup)");
+		instruction.setFont(labelFont);
+		this.add(instruction, con);
 
 		con.gridx = 0;
-		con.gridy = 1;
-		con.gridwidth = 3;
+		con.gridy++;
+		errorLabel.setFont(labelFont);
 		this.add(errorLabel, con);
 
-		con.gridx = 1;
-		con.gridy = 2;
-		con.gridwidth = 1;
-		this.add(inputField, con);
-
 		con.gridx = 0;
-		con.gridy = 3;
+		con.gridy++;
+
+		this.add(inputField, con);
+		con.gridwidth = 1;
+		con.gridx = 0;
+		con.gridy++;
+		con.fill = GridBagConstraints.HORIZONTAL;
 		this.add(setButton, con);
 
 		con.gridx = 1;
