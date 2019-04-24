@@ -26,3 +26,8 @@ hs_err_pid*
 # Database files
 
 *.csv
+
+
+#exceptions
+!rooms.csv
+

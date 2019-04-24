@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,7 +17,12 @@ import models.User;
 import models.UserManager;
 import utilities.Optional;
 
-public class LoginView extends JPanel implements LoginListener{
+/**
+ * 
+ * @author Group B
+ *
+ */
+public class LoginView extends JPanel implements LoginListener {
 
 	/**
 	 * 
@@ -36,7 +42,7 @@ public class LoginView extends JPanel implements LoginListener{
 		setLayout(new GridBagLayout());
 		initialize();
 	}
-	
+
 	private void initialize() {
 		GridBagConstraints con = new GridBagConstraints();
 		con.gridx = 0;
@@ -59,11 +65,12 @@ public class LoginView extends JPanel implements LoginListener{
 		this.add(login, con);
 		con.gridx = 1;
 		this.add(create, con);
-		
+
 		create.addActionListener(e -> {
-			//This is insecure, side channels possible
-			Optional<User> result = userManager.createUser(username.getText(), new String(password.getPassword()), "customer", true);
-			if(!result.success()) {
+			// This is insecure, side channels possible
+			Optional<User> result = userManager.createUser(username.getText(), new String(password.getPassword()),
+					"customer", true);
+			if (!result.success()) {
 				errorLabel.setForeground(Color.RED);
 				errorLabel.setText(result.getErrMsg());
 			} else {
@@ -72,29 +79,30 @@ public class LoginView extends JPanel implements LoginListener{
 				userManager.save();
 			}
 		});
-		
+
 		login.addActionListener(e -> {
-			//System.out.println(userManager);
+			// System.out.println(userManager);
 			Optional<User> result = userManager.login(username.getText(), new String(password.getPassword()));
-			if(!result.success()) {
+			if (!result.success()) {
 				errorLabel.setForeground(Color.RED);
 				errorLabel.setText("Incorrect user name or password");
 			} else {
-				if(result.get().hasPermission("customer")) {
-					viewChanger.redirect("CustomerMainView");
+
+				if (result.get().hasPermission("customer")) {
+					viewChanger.redirect("CustMainView");
+				} else if (result.get().hasPermission("employee")) {
+					viewChanger.redirect("EmpMainView");
+
 				}
-				else if(result.get().hasPermission("employee")) {
-					viewChanger.redirect("UpdateAccountView");
-				}
-				
+
 			}
 		});
 	}
-	
+
 	void resetFields() {
 		Component[] components = this.getComponents();
-		for(Component c : components) {
-			if(c instanceof JTextField) {
+		for (Component c : components) {
+			if (c instanceof JTextField) {
 				((JTextField) c).setText("");
 			}
 		}
@@ -109,7 +117,7 @@ public class LoginView extends JPanel implements LoginListener{
 	@Override
 	public void logoutOccurred() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void setUserManager(UserManager userManager) {

@@ -11,7 +11,11 @@ import utilities.CSVReader;
 import utilities.CSVWriter;
 
 /**
- * @author steve
+ * SettingsManager
+ * 
+ * Handles loading and saving setting to file.
+ * 
+ * @author Group B
  *
  */
 public class SettingsManager extends ModelManager {
@@ -20,7 +24,10 @@ public class SettingsManager extends ModelManager {
 	private Settings settings;
 
 	/**
+	 * SettingsManager Loads settings from file or starts a file with default
+	 * settings
 	 * 
+	 * @param filename the name of the file to load the settings from
 	 */
 	public SettingsManager(String filename) {
 		this.filename = filename;
@@ -37,8 +44,15 @@ public class SettingsManager extends ModelManager {
 			return;
 		}
 	}
-	
-	public Settings getSettings() { return settings;}
+
+	/*
+	 * Settings is only to be a single instance
+	 * 
+	 * @return the settings instance
+	 */
+	public Settings getSettings() {
+		return settings;
+	}
 
 	@Override
 	public void save() {
