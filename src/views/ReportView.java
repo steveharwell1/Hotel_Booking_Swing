@@ -5,7 +5,7 @@ import java.awt.GridBagLayout;
 
 //Add Components imports
 import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 import controlers.LoginListener;
 import controlers.UserEvent;
@@ -16,7 +16,7 @@ import models.User;
  * @author Group B
  *
  */
-public class ReportView extends JPanel implements LoginListener {
+public class ReportView extends View implements LoginListener {
 
 	private static final long serialVersionUID = 1L;
 	RedirectListener viewChanger;
@@ -41,17 +41,23 @@ public class ReportView extends JPanel implements LoginListener {
 
 //		Add components to layout and save inputs to fields
 
+		con.gridwidth = GridBagConstraints.REMAINDER;
+		JLabel marquee = new JLabel("Choose Report");
+		marquee.setFont(jumboFont);
+		this.add(marquee, con);
+
+		con.gridwidth = 1;
 		con.gridx = 1;
-		con.gridy = 0;
+		con.gridy = 1;
 		this.add(create1, con);
 		con.gridx = 2;
-		con.gridy = 0;
+		con.gridy = 1;
 		this.add(create2, con);
 		con.gridx = 3;
-		con.gridy = 0;
+		con.gridy = 1;
 		this.add(create3, con);
 		con.gridx = 4;
-		con.gridy = 0;
+		con.gridy = 1;
 		this.add(create4, con);
 
 		// add controllers to components

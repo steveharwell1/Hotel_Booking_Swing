@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
 import controlers.LoginListener;
@@ -26,7 +25,7 @@ import models.User;
  * @author Group B
  *
  */
-public class CheckinView extends JPanel implements LoginListener {
+public class CheckinView extends View implements LoginListener {
 	private static final long serialVersionUID = 1L;
 	private RedirectListener viewChanger;
 	private User activeUser;
@@ -59,14 +58,18 @@ public class CheckinView extends JPanel implements LoginListener {
 		con.gridy = 0;
 		con.gridwidth = GridBagConstraints.REMAINDER;
 
+		JLabel marquee = new JLabel("Check in/out Customers");
+		marquee.setFont(jumboFont);
+		this.add(marquee, con);
+
+		//////////////// Next Row/////////////////////
+		con.gridy++;
 		this.add(roomList, con);
 		roomList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		//////////////// Next Row/////////////////////
 		con.gridy++;
-		con.gridwidth = 3;
-
-		con.gridx = 0;
+		errorLabel.setFont(labelFont);
 		this.add(errorLabel, con);
 
 		//////////////// Next Row/////////////////////
@@ -84,7 +87,6 @@ public class CheckinView extends JPanel implements LoginListener {
 
 		// right hand column
 		con.gridx = 3;
-		con.gridy = 1;
 		con.gridheight = GridBagConstraints.REMAINDER;
 		this.add(discount, con);
 

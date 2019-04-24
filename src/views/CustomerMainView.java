@@ -6,13 +6,12 @@ import java.awt.GridBagLayout;
 //Add Components imports
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import controlers.LoginListener;
 import controlers.UserEvent;
 import models.User;
 
-public class CustomerMainView extends JPanel implements LoginListener {
+public class CustomerMainView extends View implements LoginListener {
 
 	private static final long serialVersionUID = 1L;
 	RedirectListener viewChanger;
@@ -40,23 +39,32 @@ public class CustomerMainView extends JPanel implements LoginListener {
 		con.gridx = 0;
 		con.gridy = 0;
 		con.gridwidth = GridBagConstraints.REMAINDER;
+		con.fill = GridBagConstraints.HORIZONTAL;
+
+		JLabel marquee = new JLabel("Main Menu");
+		marquee.setFont(jumboFont);
+		this.add(marquee, con);
+
+		con.gridy++;
+
+		welcomeMessage.setFont(labelFont);
 		this.add(welcomeMessage, con);
 
 		con.gridx = 0;
-		con.gridy = 2;
+		con.gridy++;
 		con.gridwidth = 1;
 		this.add(makeReservation, con);
 
 		con.gridx = 1;
-		con.gridy = 2;
+
 		this.add(viewReservation, con);
 
 		con.gridx = 3;
-		con.gridy = 2;
+
 		this.add(logout, con);
 
 		con.gridx = 2;
-		con.gridy = 2;
+
 		this.add(changePassword, con);
 
 //		Add Controllers to components

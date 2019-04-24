@@ -4,7 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 import controlers.LoginListener;
 import controlers.UserEvent;
@@ -18,14 +18,15 @@ import models.User;
  * @author Group B
  *
  */
-public class TmpEmpMainView extends JPanel implements LoginListener {
+public class TmpEmpMainView extends View implements LoginListener {
 
 	private static final long serialVersionUID = 1L;
 	RedirectListener viewChanger;
 
 	// Add component variables
 	// JButton create = new JButton("Create Account");
-	JButton closeRoom = new JButton("Close Room");
+	JLabel marquee = new JLabel("Main Menu");
+//	JButton closeRoom = new JButton("Close Room");
 	JButton checkins = new JButton("Checkin/out Customers");
 	JButton reports = new JButton("View Reports");
 	JButton changePrice = new JButton("Change Weekend Price");
@@ -48,16 +49,22 @@ public class TmpEmpMainView extends JPanel implements LoginListener {
 //		con.gridx = 1;
 //		con.gridy = 2;
 //		this.add(create, con);
-		con.gridy = 0;
+		con.fill = GridBagConstraints.HORIZONTAL;
+		con.gridwidth = GridBagConstraints.REMAINDER;
+		marquee.setFont(jumboFont);
+		this.add(marquee, con);
 
-		con.gridx = 0;
-		this.add(closeRoom, con);
+		con.gridwidth = 1;
+		con.gridy = 1;
+
+//		con.gridx = 0;
+//		this.add(closeRoom, con);
 		con.gridx = 1;
 		this.add(checkins, con);
 		con.gridx = 2;
 		this.add(reports, con);
 
-		con.gridy = 1;
+		con.gridy = 2;
 		con.gridx = 0;
 		this.add(changePrice, con);
 		con.gridx = 1;
@@ -100,10 +107,10 @@ public class TmpEmpMainView extends JPanel implements LoginListener {
 		this.activeUser = e.getActiveUser();
 		if (!activeUser.hasPermission("manager")) {
 			changePrice.setEnabled(false);
-			closeRoom.setEnabled(false);
+//			closeRoom.setEnabled(false);
 		} else if (activeUser.hasPermission("manager")) {
 			changePrice.setEnabled(true);
-			closeRoom.setEnabled(true);
+//			closeRoom.setEnabled(true);
 		}
 
 	}

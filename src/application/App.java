@@ -10,13 +10,13 @@ import models.SettingsManager;
 import models.TransactionManager;
 import models.UserManager;
 import views.CheckinView;
+import views.CustomerMainView;
 import views.LoginView;
 import views.PricingView;
 import views.RedirectListener;
 import views.ReportView;
 import views.ReservationView;
 import views.RevenueReportView;
-import views.CustomerMainView;
 import views.TmpEmpMainView;
 import views.TransactionsView;
 import views.UpdateAccountView;
@@ -87,12 +87,11 @@ public class App implements RedirectListener {
 		reservationView.addSettingManager(settingsManager);
 		userManager.addLoginListener(reservationView);
 		frame.add(reservationView, "ReservationView");
-	
+
 		// My edits
 		CustomerMainView custMainView = new CustomerMainView(this);
 		userManager.addLoginListener(custMainView);
 		frame.add(custMainView, "CustMainView");
-
 
 		CheckinView checkinView = new CheckinView(this);
 		checkinView.setTransactionManager(transactionManager);
