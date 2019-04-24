@@ -16,7 +16,7 @@ import views.RedirectListener;
 import views.ReportView;
 import views.ReservationView;
 import views.RevenueReportView;
-import views.TmpCustMainView;
+import views.CustomerMainView;
 import views.TmpEmpMainView;
 import views.TransactionsView;
 import views.UpdateAccountView;
@@ -87,6 +87,12 @@ public class App implements RedirectListener {
 		reservationView.addSettingManager(settingsManager);
 		userManager.addLoginListener(reservationView);
 		frame.add(reservationView, "ReservationView");
+	
+		// My edits
+		CustomerMainView custMainView = new CustomerMainView(this);
+		userManager.addLoginListener(custMainView);
+		frame.add(custMainView, "CustMainView");
+
 
 		CheckinView checkinView = new CheckinView(this);
 		checkinView.setTransactionManager(transactionManager);
@@ -96,10 +102,6 @@ public class App implements RedirectListener {
 		TmpEmpMainView empMainView = new TmpEmpMainView(this);
 		userManager.addLoginListener(empMainView);
 		frame.add(empMainView, "EmpMainView");
-
-		TmpCustMainView custMainView = new TmpCustMainView(this);
-		userManager.addLoginListener(custMainView);
-		frame.add(custMainView, "CustMainView");
 
 		ReportView reportView = new ReportView(this);
 		userManager.addLoginListener(reportView);

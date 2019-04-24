@@ -87,10 +87,12 @@ public class LoginView extends JPanel implements LoginListener {
 				errorLabel.setForeground(Color.RED);
 				errorLabel.setText("Incorrect user name or password");
 			} else {
+
 				if (result.get().hasPermission("customer")) {
 					viewChanger.redirect("CustMainView");
 				} else if (result.get().hasPermission("employee")) {
 					viewChanger.redirect("EmpMainView");
+
 				}
 
 			}
