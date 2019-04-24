@@ -7,10 +7,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
+import java.awt.Toolkit;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -33,23 +31,17 @@ public abstract class View extends JPanel {
 	 */
 	public View() {
 		super();
-		try {
-			img = ImageIO.read(new File("background.jpg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/background.jpg"));
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (img != null) {
-			g.drawImage(img, 0, 0, null);
+			g.drawImage(img, 0, 0, this);
 		} else {
 			System.out.println("image was null");
 		}
-
 	}
 
 	protected void resetFields() {
